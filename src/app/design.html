@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS URL Analyzer</title>
+    
+    <!-- This script pulls in the Tailwind CSS library -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts Import: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Apply the custom font to the entire page */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+
+    <div class="container mx-auto px-4">
+
+        <!-- Header -->
+        <header class="flex justify-between items-center py-6">
+            <h1 class="text-2xl font-bold">URL Analyzer</h1>
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-cyan-400 transition-colors duration-300">About</a>
+                <a href="#" class="hover:text-cyan-400 transition-colors duration-300">FAQ</a>
+            </nav>
+            <!-- Mobile Menu Button (Visual Only) -->
+            <div class="md:hidden">
+                <button class="text-slate-100 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex flex-col items-center justify-center min-h-screen text-center -mt-20">
+            <div class="w-full max-w-md">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Analyze Any URL</h2>
+                <p class="text-slate-400 mb-8">Paste a URL below to get a detailed analysis.</p>
+
+                <!-- Input and Button -->
+                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                    <input type="url" placeholder="https://example.com" class="flex-grow bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cyan-500 w-full">
+                    <button class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 w-full sm:w-auto">Analyze</button>
+                </div>
+
+                <!-- Always-Visible Progress Bar -->
+                <div class="w-full bg-slate-700 rounded-full h-4">
+                    <div class="bg-cyan-500 h-4 rounded-full" style="width: 45%"></div>
+                </div>
+                <p class="mt-2 text-sm text-slate-400">Analysis in progress...</p>
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>
