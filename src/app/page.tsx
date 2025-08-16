@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import ProgressBar from "./components/ProgressBar";
 
 export default function Home() {
@@ -35,7 +36,16 @@ export default function Home() {
   return (
     <div className="container mx-auto px-4">
       <header className="flex justify-between items-center py-6">
-        <h1 className="text-2xl font-bold">Image Pry</h1>
+        <Image 
+          src="/logo2.png" 
+          alt="Image Pry Logo" 
+          width={240} 
+          height={240} 
+          className="h-24 w-auto"
+          style={{
+            filter: 'hue-rotate(27deg) saturate(1.1) brightness(2.9)'
+          }}
+        />
         <nav className="hidden md:flex space-x-6">
           <a href="#" className="hover:text-cyan-400 transition-colors duration-300">About</a>
           <a href="#" className="hover:text-cyan-400 transition-colors duration-300">FAQ</a>
