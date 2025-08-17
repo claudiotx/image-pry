@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: imagepry-svc
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 80           # This is the port the service exposes
+    protocol: TCP
+    targetPort: 3000   # This should match your container port (3000)
+  selector:
+    app: imagepry
+  sessionAffinity: None
+  type: NodePort
