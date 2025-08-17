@@ -1,5 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+async function followRedirects(url: string): Promise<string> {
+  let currentUrl = url;
+  const maxRedirects = 5;
+  let redirectCount = 0;
+
+  while (redirectCount < maxRedirects) {
+    const response = await fetch(currentUrl, {
+      method: 'HEAD',
+      redirect: 'manual',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+      }
+    });
+
+    if (response.status >= 300 && response.status < 400) {
+      const location = response.headers.get('location');
+      if (location) {
+        currentUrl = new URL(location, currentUrl).href;
+        redirectCount++;
+      } else {
+        break;
+      }
+    } else {
+      break;
+    }
+  }
+
+  return currentUrl;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { url } = await request.json();
@@ -11,16 +41,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate that it's a Pinterest URL
-    if (!url.includes('pinterest.com')) {
+    let finalUrl = url;
+
+    // Handle Pinterest shortened URLs (pin.it)
+    if (url.includes('pin.it')) {
+      finalUrl = await followRedirects(url);
+    }
+
+    // Validate that it's a Pinterest URL (after following redirects)
+    if (!finalUrl.includes('pinterest.com')) {
       return NextResponse.json(
         { error: 'Only Pinterest URLs are supported' },
         { status: 400 }
       );
     }
 
-    // Fetch the Pinterest page
-    const response = await fetch(url, {
+    // Fetch the Pinterest page using the final URL
+    const response = await fetch(finalUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
       }
