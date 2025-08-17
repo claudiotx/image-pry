@@ -61,8 +61,8 @@ export default function Home() {
 
       <main className="flex flex-col items-center justify-center min-h-screen text-center -mt-20">
         <div className="w-full max-w-lg">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Paste link with image</h2>
-          <p className="text-slate-400 mb-8">Paste a URL below to extract and pry images from the web.</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Pinterest Image</h2>
+          <p className="text-slate-400 mb-8">Paste the URL below ang get your image!</p>
 
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -71,6 +71,16 @@ export default function Home() {
                 placeholder="https://example.com" 
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
+                onFocus={(e) => {
+                  if (e.target.value === '') {
+                    e.target.placeholder = '';
+                  }
+                }}
+                onBlur={(e) => {
+                  if (e.target.value === '') {
+                    e.target.placeholder = 'https://example.com';
+                  }
+                }}
                 className="flex-grow bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cyan-500 w-full"
                 required
               />
